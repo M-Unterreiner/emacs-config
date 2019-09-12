@@ -85,6 +85,9 @@
  '(plantuml-jar-path "~/.emacs.d/plantuml/plantuml.jar"))
 
 
+
+
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -247,6 +250,12 @@
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-switchb)
 
+(setq org-plantuml-jar-path
+      (expand-file-name "~/.emacs.d/plantuml/plantuml.jar"))
+
+(setq org-hide-emphasis-markers t)
+
+
 ;;+++ markdown +++
 ;; needs pandoc, using markdown in Emacs
 (setq markdown-command "/usr/bin/pandoc")
@@ -327,10 +336,22 @@
 ;              '("sc" . "src"))
 
 
+;; Wofür sind die folgenden 3 Zeilen? Ich vermute, dass es den Source Block im org-mode ermöglicht.
 (add-to-list 'org-structure-template-alist '("y" . "src c++"))
 
 (org-babel-do-load-languages
- 'org-babel-load-languages '((C . t)))
+ 'org-babel-load-languages '((C . t)
+			     (plantuml . t))
+
+;; add plantuml in org-mode
+;; http://eschulte.github.io/babel-dev/DONE-integrate-plantuml-support.html
+;(org-babel-do-load-languages
+; 'org-babel-load-languages
+; '((plantuml . t))) ; this line activates dot
+
+;(with-eval-after-load 'org-babel-do-load-languages
+;  'org-babel-load-languages '(plantuml . t))
+
 
 ; (add-to-list 'load-path "~/.emacs.d/lisp/")
 ; (load "ob-C.el")
