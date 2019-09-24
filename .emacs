@@ -255,7 +255,10 @@
 
 (setq org-hide-emphasis-markers t)
 
-
+;;+++ org-mode calendar ++;;+++ org-mode calendar ++++
+    (add-hook 'calendar-load-hook
+              (lambda ()
+                (calendar-set-date-style 'european)))
 ;;+++ markdown +++
 ;; needs pandoc, using markdown in Emacs
 (setq markdown-command "/usr/bin/pandoc")
