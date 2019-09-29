@@ -27,6 +27,7 @@
 	;; org-mode
 	org
 	org-kanban
+	org-capture-templates
 	;; Other stuff
 	use-package
 	
@@ -254,6 +255,49 @@
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-switchb)
 
+(use-package org
+  :ensure org-plus-contrib
+  :config
+    ; really long config section omitted
+    ; not sure if I need this:
+    (setq org-default-notes-file "~/.emacs.d/org/inbox.org")
+    (setq org-capture-templates
+          '(("t" "Todo [inbox]" entry
+          (file+headline "~/.emacs.d/org/inbox.org" "Tasks")
+          "* TODO %i%?\n%a")
+            ("n" "Todo [inbox, no link]" entry
+            (file+headline "~/.emacs.d/org/inbox.org" "Tasks")
+            "* TODO %i%?\n")
+            ("b" "Backlog" entry
+            (file+headline "~/.emacs.d/org/backlog.org" "Backlog")
+            "* %i%?\n%a")))
+  :bind (; other bindings removed
+         ("C-c c" . org-capture)))
+;; org-Agenda
+;; Maybe I should have a look on super-agenda:
+;; https://github.com/alphapapa/org-super-agenda
+
+(setq org-agenda-files '("~/.emacs.d/org/"))
+
+;;(setq org-agenda-files (list "~/org/uni.org" 
+;;                             "~/org/home.org"
+;;			     "~/org/birthday.org"))
+
+(setq org-todo-keyword-faces
+  '(("WORKING" . "orange")
+    ("CANCELLED" . "grey")
+    ("IDEA" . "yellow")))
+
+;; http://www.johnborwick.com/2019/02/23/org-todo-setup.html
+;; WAITING(w@/!) means w is the keyboard shortcut,
+;; @ means "note with timestamp"
+;; /! means "add a timestamp even if I bailed on writing a note." 
+
+
+(setq org-todo-keywords
+  '((sequence "TODO(t)" "WORKING(n)" "WAITING(w@)"
+              "POSTPONED(p)" "DONE(d@/!)" "CANCELLED(c)" "IDEA(@)")))
+
 (setq org-plantuml-jar-path
       (expand-file-name "~/.emacs.d/plantuml/plantuml.jar"))
 
@@ -276,6 +320,12 @@
 			    '(invisible t)))
      (when state (setq buffer-read-only t))))
 
+
+;; org-kanban
+;; (require 'org)
+;; (define-key "C-al" 'org-kanban/switch)
+
+;; org-calendar
 (setq calendar-week-start-day 1)
 
 (setq solar-n-hemi-seasons
