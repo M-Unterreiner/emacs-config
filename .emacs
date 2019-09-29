@@ -24,6 +24,9 @@
 	flycheck
 	markdown-mode
 	yasnippet
+	;; org-mode
+	org
+	org-kanban
 	;; Other stuff
 	use-package
 	
