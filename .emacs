@@ -27,7 +27,7 @@
 	;; org-mode
 	org
 	org-kanban
-	org-capture-templates
+	;; org-capture-templates
 	;; Other stuff
 	use-package
 	
@@ -256,7 +256,7 @@
 (global-set-key "\C-cb" 'org-switchb)
 
 (use-package org
-  :ensure org-plus-contrib
+  ;; :ensure org-plus-contrib 
   :config
     ; really long config section omitted
     ; not sure if I need this:
@@ -273,6 +273,7 @@
             "* %i%?\n%a")))
   :bind (; other bindings removed
          ("C-c c" . org-capture)))
+
 ;; org-Agenda
 ;; Maybe I should have a look on super-agenda:
 ;; https://github.com/alphapapa/org-super-agenda
