@@ -255,6 +255,17 @@
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-switchb)
 
+(add-hook 'org-finalize-agenda-hook
+  (lambda ()
+    (setq appt-message-warning-time 10        ;; warn 10 min in advance
+          appt-display-diary nil              ;; do not display diary when (appt-activate) is called
+          appt-display-mode-line t            ;; show in the modeline
+          appt-display-format 'window         ;; display notification in window
+          calendar-mark-diary-entries-flag t) ;; mark diary entries in calendar
+          org-agenda-include-diary t          ;; indlude agenda in diary
+    (org-agenda-to-appt)                      ;; copy all agenda schedule to appointments
+    (appt-activate 1)))                       ;; active appt (appointment notification)
+
 (use-package org
   ;; :ensure org-plus-contrib 
   :config
@@ -363,6 +374,29 @@
     (add-hook 'calendar-load-hook
               (lambda ()
                 (calendar-set-date-style 'european)))
+
+(defun diary-schedule (m1 d1 y1 m2 d2 y2 dayname)
+    "Entry applies if date is between dates on DAYNAME. 
+    Order of the parameters is M1, D1, Y1, M2, D2, Y2 if 
+    `european-calendar-style' is nil, and D1, M1, Y1, D2, M2, Y2 if 
+    `european-calendar-style' is t. Entry does not apply on a history."
+    (let ((date1 (calendar-absolute-from-gregorian
+                    (if european-calendar-style
+                        (list d1 m1 y1)
+                      (list m1 d1 y1))))
+            (date2 (calendar-absolute-from-gregorian
+                    (if european-calendar-style
+                        (list d2 m2 y2)
+                      (list m2 d2 y2))))
+            (d (calendar-absolute-from-gregorian date)))
+        (if (and 
+             (<= date1 d) 
+             (<= d date2)
+             (= (calendar-day-of-week date) dayname)
+             (not (check-calendar-holidays date))
+             )
+             entry)))
+
 
 ;;+++ markdown +++
 ;; needs pandoc, using markdown in Emacs
