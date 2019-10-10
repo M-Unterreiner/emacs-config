@@ -30,7 +30,6 @@
 	;; org-capture-templates
 	;; Other stuff
 	use-package
-	
 	)
       )
 
@@ -248,6 +247,8 @@
     (visual-line-mode)
     (org-indent-mode)))
 
+(require 'org-element)
+
 ;; The following lines are always needed. Choose your own keys.
 ;; actually, I used it never...?
 (global-set-key "\C-cl" 'org-store-link)
@@ -336,6 +337,7 @@
 ;; org-kanban
 ;; (require 'org)
 ;; (define-key "C-al" 'org-kanban/switch)
+(define-key org-kanban (kbd "C-al")  'org-kanban/switch)
 
 ;; org-calendar
 (setq calendar-week-start-day 1)
