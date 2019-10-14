@@ -298,6 +298,7 @@
 
 (setq org-todo-keyword-faces
   '(("WORKING" . "orange")
+    ("DONE" . "green")
     ("CANCELLED" . "grey")
     ("IDEA" . "yellow")))
 
