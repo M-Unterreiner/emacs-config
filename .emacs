@@ -24,6 +24,8 @@
 	flycheck
 	markdown-mode
 	yasnippet
+	python
+	python-mode
 	;; org-mode
 	org
 	org-kanban
@@ -84,7 +86,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (multiple-cursors function-args evil-mc-extras evil-mc smart-mode-line helm-ag company-rtags rtags helm-flyspell company-c-headers use-package plantuml-mode helm-bibtex company-auctex auctex org-caldav pomodoro org all-the-icons neotree markdown-mode latex-preview-pane magit evil yasnippet)))
+    (multiple-cursors function-args evil-mc-extras evil-mc smart-mode-line helm-ag company-rtags rtags helm-flyspell company-c-headers use-package plantuml-mode helm-bibtex company-auctex auctex org-caldav pomodoro python org all-the-icons neotree markdown-mode latex-preview-pane magit evil yasnippet)))
  '(plantuml-default-exec-mode (quote jar))
  '(plantuml-jar-path "~/.emacs.d/plantuml/plantuml.jar"))
 
@@ -483,10 +485,11 @@
 
 ;; Wofür sind die folgenden 3 Zeilen? Ich vermute, dass es den Source Block im org-mode ermöglicht.
 ;;(add-to-list 'org-structure-template-alist '("y" . "src c++"))
-
 (org-babel-do-load-languages
- 'org-babel-load-languages '((C . t)
-			     (plantuml . t))
+ 'org-babel-load-languages
+ '((C . t)
+  (python . t)
+  (plantuml . t))
 
 ;; add plantuml in org-mode
 ;; http://eschulte.github.io/babel-dev/DONE-integrate-plantuml-support.html
