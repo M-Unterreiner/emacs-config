@@ -311,8 +311,8 @@
 
 
 (setq org-todo-keywords
-  '((sequence "TODO(t)" "WORKING(n)" "WAITING(w@)"
-              "POSTPONED(p)" "DONE(d@/!)" "CANCELLED(c)" "IDEA(@)")))
+  '((sequence "TODO(t)" "WORKING(n)" "WAITING(w)"
+              "POSTPONED(p)" "DONE(d)" "CANCELLED(c)" "QUESTION(q)")))
 
 (setq org-plantuml-jar-path
       (expand-file-name "~/.emacs.d/plantuml/plantuml.jar"))
@@ -336,11 +336,14 @@
 			    '(invisible t)))
      (when state (setq buffer-read-only t))))
 
+;; latex biography with org-mode 
+(setq org-latex-pdf-process (list
+   "latexmk -pdflatex='lualatex -shell-escape -interaction nonstopmode' -pdf -f  %f"))
 
 ;; org-kanban
 ;; (require 'org)
 ;; (define-key "C-al" 'org-kanban/switch)
-(define-key org-kanban (kbd "C-al")  'org-kanban/switch)
+;;(define-key org-kanban (kbd "C-al")  'org-kanban/switch)
 
 ;; org-calendar
 (setq calendar-week-start-day 1)
